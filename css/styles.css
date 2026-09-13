@@ -74,6 +74,14 @@ button {
   cursor: pointer;
 }
 
+button,
+a,
+select,
+input,
+textarea {
+  touch-action: manipulation;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -260,11 +268,11 @@ div[id] {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
+  gap: 6px;
   background: none;
   border: 2px solid rgba(200, 155, 60, 0.5);
   border-radius: 8px;
-  padding: 0.55rem 0.7rem;
+  padding: 0.75rem 0.85rem;
 }
 
 .nav-toggle-line {
@@ -545,6 +553,12 @@ div[id] {
 
 .hero-photo figcaption em {
   font-style: normal;
+}
+
+@media (max-width: 899px) {
+  .hero-ctas .btn {
+    width: 100%;
+  }
 }
 
 @media (min-width: 900px) {
@@ -1440,6 +1454,7 @@ html.js .reveal.in {
   display: flex;
   gap: 0.5rem;
   padding: 0.55rem 0.6rem;
+  padding-bottom: calc(0.55rem + env(safe-area-inset-bottom, 0px));
   background: var(--navy-deep);
   border-top: 1px solid rgba(200, 155, 60, 0.4);
 }
@@ -1494,7 +1509,21 @@ html.js .reveal.in {
 
 @media (max-width: 767px) {
   body {
-    padding-bottom: 66px;
+    padding-bottom: calc(66px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 375px) {
+  .call-bar {
+    gap: 0.35rem;
+    padding-left: 0.45rem;
+    padding-right: 0.45rem;
+  }
+
+  .call-bar-call,
+  .call-bar-cta {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.4rem;
   }
 }
 
