@@ -867,6 +867,41 @@ div[id] {
   font-weight: 600;
 }
 
+.contact-photo {
+  margin: 1.75rem 0 0;
+}
+
+.contact-photo-frame {
+  position: relative;
+  width: min(306px, 100%);
+}
+
+.contact-photo-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.75rem 1.75rem rgba(15, 42, 74, 0.25);
+}
+
+.contact-photo-runner {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.contact-photo-runner rect {
+  animation: photo-run 12s linear infinite;
+}
+
+@keyframes photo-run {
+  to {
+    stroke-dashoffset: -5026;
+  }
+}
+
 @media (min-width: 900px) {
   .area-layout {
     grid-template-columns: 1.1fr 0.9fr;

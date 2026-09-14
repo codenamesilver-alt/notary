@@ -39,12 +39,12 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 if (SMTP_USER === 'REPLACE_WITH_YOUR_GMAIL') {
-    respond(false, 'Notaryman SMTP is not configured yet. Please call (646) 973-6472.');
+    respond(false, 'Notaryman SMTP is not configured yet. Please call (518) 430-6483.');
 }
 
 $serviceLabels = [
     'mobile-notary' => 'Mobile Notary',
-    'ron' => 'Remote Online Notarization (RON)',
+    'apostille' => 'Apostille & Document Authentication',
     'loan-signing' => 'Loan Signing Services',
     'real-estate' => 'Real Estate & Title Documents',
     'wedding-officiant' => 'Wedding Officiant Notary',
@@ -87,5 +87,5 @@ try {
     respond(true, 'Request received - the notary will call you back shortly to confirm.');
 } catch (Exception $e) {
     error_log('Lead mail failed: ' . $mail->ErrorInfo);
-    respond(false, 'Message could not be sent right now. Please call (646) 973-6472.');
+    respond(false, 'Message could not be sent right now. Please call (518) 430-6483.');
 }

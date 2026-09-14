@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 const SERVICE_LABELS = {
   "mobile-notary": "Mobile Notary",
-  ron: "Remote Online Notarization (RON)",
+  apostille: "Apostille & Document Authentication",
   "loan-signing": "Loan Signing Services",
   "real-estate": "Real Estate & Title Documents",
   "wedding-officiant": "Wedding Officiant Notary",
@@ -51,7 +51,7 @@ module.exports = async function handler(req, res) {
     console.error("Lead mail failed: SMTP env not configured");
     res.status(500).json({
       success: false,
-      message: "Message could not be sent right now. Please call (646) 973-6472."
+      message: "Message could not be sent right now. Please call (518) 430-6483."
     });
     return;
   }
@@ -99,7 +99,7 @@ module.exports = async function handler(req, res) {
     console.error("Lead mail failed:", err.message);
     res.status(500).json({
       success: false,
-      message: "Message could not be sent right now. Please call (646) 973-6472."
+      message: "Message could not be sent right now. Please call (518) 430-6483."
     });
   }
 };

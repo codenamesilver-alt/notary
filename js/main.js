@@ -110,15 +110,15 @@
       } else {
         showResult(
           "error",
-          json && json.message ? json.message : "Could not submit — please call (646) 973-6472."
+          json && json.message ? json.message : "Could not submit — please call (518) 430-6483."
         );
       }
     } catch (e) {
       showResult(
         "error",
         e.name === "AbortError"
-          ? "Request timed out — please call (646) 973-6472."
-          : "Could not reach the server — please call (646) 973-6472."
+          ? "Request timed out — please call (518) 430-6483."
+          : "Could not reach the server — please call (518) 430-6483."
       );
     } finally {
       window.clearTimeout(timeout);
