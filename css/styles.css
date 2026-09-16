@@ -623,7 +623,7 @@ div[id] {
 .divider-seal {
   background: var(--offwhite);
   text-align: center;
-  padding-block: 1.5rem;
+  padding-block: 1rem;
 }
 
 .divider-seal svg {
@@ -632,7 +632,47 @@ div[id] {
   opacity: 0.85;
 }
 
+/* Blog */
+.blog-posts {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.blog-post {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.blog-post h3 {
+  color: var(--navy);
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.blog-post p {
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+.blog-post ul {
+  margin: 0 0 1.25rem;
+  padding-left: 1.25rem;
+}
+
+.blog-post li {
+  margin-bottom: 0.35rem;
+  line-height: 1.55;
+}
+
 /* Services */
+#services {
+  padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
 .services-grid {
   display: grid;
   gap: 1.25rem;
@@ -868,12 +908,13 @@ div[id] {
 }
 
 .contact-photo {
-  margin: 1.75rem 0 0;
+  margin: 1.25rem auto 0;
+  max-width: min(204px, 100%);
 }
 
 .contact-photo-frame {
   position: relative;
-  width: min(306px, 100%);
+  width: min(204px, 100%);
 }
 
 .contact-photo-frame img {

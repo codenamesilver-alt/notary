@@ -182,12 +182,27 @@
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
-      if (!callModal.hidden) {
+      if (!disclaimerModal.hidden) {
+        disclaimerModal.hidden = true;
+        document.body.classList.remove("modal-open");
+      } else if (!callModal.hidden) {
         closeCallModal();
       } else if (!successModal.hidden) {
         closeSuccessModal();
       }
     }
+  });
+
+  var disclaimerModal = document.getElementById("disclaimer-modal");
+  disclaimerModal.hidden = false;
+  document.body.classList.add("modal-open");
+  disclaimerModal.querySelector(".call-modal-close, [data-disclaimer-close]").focus();
+
+  disclaimerModal.querySelectorAll("[data-disclaimer-close]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      disclaimerModal.hidden = true;
+      document.body.classList.remove("modal-open");
+    });
   });
 
   document.documentElement.classList.add("js");
