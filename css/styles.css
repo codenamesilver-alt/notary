@@ -990,7 +990,7 @@ div[id] {
   color: var(--gold);
   text-align: center;
   margin: 1.5rem 0 0;
-  font-size: 0.95rem;
+  font-size: 0.475rem;
 }
 
 .avail-empty {

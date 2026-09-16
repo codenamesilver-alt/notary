@@ -3,3 +3,8 @@
 node_modules/
 vendor/
 config.php
+
+.agents/
+.claude/
+agent/
+skills-lock.json

@@ -182,27 +182,12 @@
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
-      if (!disclaimerModal.hidden) {
-        disclaimerModal.hidden = true;
-        document.body.classList.remove("modal-open");
-      } else if (!callModal.hidden) {
+      if (!callModal.hidden) {
         closeCallModal();
       } else if (!successModal.hidden) {
         closeSuccessModal();
       }
     }
-  });
-
-  var disclaimerModal = document.getElementById("disclaimer-modal");
-  disclaimerModal.hidden = false;
-  document.body.classList.add("modal-open");
-  disclaimerModal.querySelector(".call-modal-close, [data-disclaimer-close]").focus();
-
-  disclaimerModal.querySelectorAll("[data-disclaimer-close]").forEach(function (el) {
-    el.addEventListener("click", function () {
-      disclaimerModal.hidden = true;
-      document.body.classList.remove("modal-open");
-    });
   });
 
   var daysWrap = document.querySelector(".avail-days");
