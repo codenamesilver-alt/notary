@@ -205,6 +205,110 @@
     });
   });
 
+  var daysWrap = document.querySelector(".avail-days");
+  var slotsWrap = document.querySelector(".avail-slots");
+
+  if (daysWrap && slotsWrap) {
+    var DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var SLOT_TIMES = [
+      { t: "8:00 AM", h: 8, m: 0 },
+      { t: "9:30 AM", h: 9, m: 30 },
+      { t: "11:00 AM", h: 11, m: 0 },
+      { t: "12:30 PM", h: 12, m: 30 },
+      { t: "2:00 PM", h: 14, m: 0 },
+      { t: "3:30 PM", h: 15, m: 30 },
+      { t: "5:00 PM", h: 17, m: 0 },
+      { t: "6:30 PM", h: 18, m: 30 },
+      { t: "8:00 PM", h: 20, m: 0 }
+    ];
+
+    var now = new Date();
+    var monday = new Date(now);
+    var dayNum = (now.getDay() + 6) % 7;
+    monday.setDate(now.getDate() - dayNum);
+    monday.setHours(0, 0, 0, 0);
+
+    var days = DAY_NAMES.map(function (name, i) {
+      var d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      return { name: name, date: d, isToday: i === dayNum };
+    });
+
+    function pad(n) {
+      return String(n).padStart(2, "0");
+    }
+
+    function renderSlots(selected) {
+      slotsWrap.textContent = "";
+      var dateStr = selected.date.getFullYear() + "-" + pad(selected.date.getMonth() + 1) + "-" + pad(selected.date.getDate());
+
+      var open = SLOT_TIMES.filter(function (slot) {
+        if (!selected.isToday) {
+          return true;
+        }
+        return slot.h * 60 + slot.m > now.getHours() * 60 + now.getMinutes() + 60;
+      });
+
+      if (open.length === 0) {
+        var none = document.createElement("p");
+        none.className = "avail-empty";
+        none.textContent = "No same-day slots left today — call or text (518) 430-6483.";
+        slotsWrap.appendChild(none);
+        return;
+      }
+
+      open.forEach(function (slot) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "avail-slot";
+        btn.textContent = slot.t;
+        btn.setAttribute("aria-label", slot.t + " on " + selected.name + " " + dateStr);
+        btn.addEventListener("click", function () {
+          var preferred = document.getElementById("preferred");
+          if (preferred) {
+            preferred.value = dateStr + "T" + pad(slot.h) + ":" + pad(slot.m);
+          }
+          document.getElementById("contact").scrollIntoView({ behavior: "smooth", block: "start" });
+          window.setTimeout(function () {
+            var field = document.getElementById("preferred");
+            if (field) {
+              field.focus({ preventScroll: true });
+            }
+          }, 700);
+        });
+        slotsWrap.appendChild(btn);
+      });
+    }
+
+    days.forEach(function (day) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "avail-day";
+      btn.setAttribute("role", "tab");
+      btn.textContent = day.name;
+
+      if (day.isToday) {
+        var badge = document.createElement("span");
+        badge.className = "avail-today";
+        badge.textContent = "Same Day";
+        btn.appendChild(badge);
+      }
+
+      btn.addEventListener("click", function () {
+        daysWrap.querySelectorAll(".avail-day").forEach(function (el) {
+          el.setAttribute("aria-selected", "false");
+        });
+        btn.setAttribute("aria-selected", "true");
+        renderSlots(day);
+      });
+
+      daysWrap.appendChild(btn);
+    });
+
+    daysWrap.querySelector(".avail-day").setAttribute("aria-selected", "true");
+    renderSlots(days[0]);
+  }
+
   document.documentElement.classList.add("js");
 
   if ("IntersectionObserver" in window) {

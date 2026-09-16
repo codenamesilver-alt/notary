@@ -29,6 +29,11 @@ module.exports = async function handler(req, res) {
   const service = get("service");
   const preferred = get("preferred_date_time");
   const message = get("message");
+  const address1 = get("address1");
+  const address2 = get("address2");
+  const city = get("city");
+  const state = get("state");
+  const zip = get("zip");
 
   if (!name || !phone || !email || !service) {
     res.status(400).json({
@@ -56,6 +61,9 @@ module.exports = async function handler(req, res) {
     return;
   }
 
+  const address = [address1, address2].filter(Boolean).join(", ");
+  const location = [city, state, zip].filter(Boolean).join(" ");
+
   const serviceLabel = SERVICE_LABELS[service] || service;
 
   const body = [
@@ -67,6 +75,8 @@ module.exports = async function handler(req, res) {
     "Email:           " + email,
     "Service needed:  " + serviceLabel,
     "Preferred date:  " + (preferred || "Not specified"),
+    "Address:         " + (address || "Not provided"),
+    "City/State/Zip:  " + (location || "Not provided"),
     "",
     "Message:",
     message || "(none)",

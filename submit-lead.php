@@ -29,6 +29,11 @@ $email = trim($_POST['email'] ?? '');
 $service = trim($_POST['service'] ?? '');
 $preferred = trim($_POST['preferred_date_time'] ?? '');
 $message = trim($_POST['message'] ?? '');
+$address1 = trim($_POST['address1'] ?? '');
+$address2 = trim($_POST['address2'] ?? '');
+$city = trim($_POST['city'] ?? '');
+$state = trim($_POST['state'] ?? '');
+$zip = trim($_POST['zip'] ?? '');
 
 if ($name === '' || $phone === '' || $email === '' || $service === '') {
     respond(false, 'Please fill in your name, phone, email, and the service needed.');
@@ -53,6 +58,9 @@ $serviceLabels = [
 ];
 $service = $serviceLabels[$service] ?? ($service !== '' ? $service : 'Not specified');
 
+$address = trim($address1 . ($address2 !== '' ? ", $address2" : ''));
+$location = trim($city . ' ' . $state . ($zip !== '' ? " $zip" : ''));
+
 $body  = "New lead via notaryman website\n";
 $body .= "--------------------------------\n\n";
 $body .= "Name:            $name\n";
@@ -60,6 +68,8 @@ $body .= "Phone:           $phone\n";
 $body .= "Email:           $email\n";
 $body .= "Service needed:  $service\n";
 $body .= "Preferred date:  " . ($preferred !== '' ? $preferred : 'Not specified') . "\n";
+$body .= "Address:         " . ($address !== '' ? $address : 'Not provided') . "\n";
+$body .= "City/State/Zip:  " . ($location !== '' ? $location : 'Not provided') . "\n";
 $body .= "\nMessage:\n" . ($message !== '' ? $message : '(none)') . "\n";
 
 $mail = new PHPMailer(true);
