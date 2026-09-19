@@ -2,7 +2,6 @@ const nodemailer = require("nodemailer");
 
 const SERVICE_LABELS = {
   "mobile-notary": "Mobile Notary",
-  apostille: "Apostille & Document Authentication",
   "loan-signing": "Loan Signing Services",
   "real-estate": "Real Estate & Title Documents",
   "wedding-officiant": "Wedding Officiant Notary",
